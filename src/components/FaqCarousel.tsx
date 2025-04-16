@@ -52,7 +52,7 @@ export default function FaqCarousel() {
       id="faq"
       className="relative flex flex-col items-center w-full gap-16 py-10 md:py-20 mx-auto max-w-7xl"
     >
-      <div className="absolute right-0 flex flex-col items-center gap-3 -top-10">
+      <div className="absolute right-2 flex flex-col items-center gap-3 -top-10">
         <div className="bg-[#FF5627] w-[45px] h-[25px]"></div>
         <div className="bg-[#175097] w-[45px] h-[25px]"></div>
         <div className="bg-[#84D6DA] w-[45px] h-[25px]"></div>
