@@ -41,7 +41,7 @@ export function useChargingPoints(isLoaded: boolean) {
     if (!isLoaded) return
     ;(async () => {
       try {
-        const res = await fetch('http://localhost:3000/chargingPoints')
+        const res = await fetch('https://api-tecsomobi.onrender.com/chargingPoints')
         const raw: ChargingPoint[] = await res.json()
 
         const mapped = await Promise.all(

@@ -70,7 +70,7 @@ const AdminPage = () => {
   const loadChargingPoints = async () => {
     const token = getToken();
     try {
-      const response = await fetch("http://localhost:3000/chargingPoints", {
+      const response = await fetch("https://api-tecsomobi.onrender.com/chargingPoints", {
         headers: {
           "Content-Type": "application/json",
           Authorization: token ? `Bearer ${token}` : "",
@@ -89,7 +89,7 @@ const AdminPage = () => {
     if (token) {
       (async () => {
         try {
-          const response = await fetch("http://localhost:3000/admin/profile", {
+          const response = await fetch("https://api-tecsomobi.onrender.com/admin/profile", {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ const AdminPage = () => {
     password: string,
   ) => {
     try {
-      const response = await fetch("http://localhost:3000/admin/login", {
+      const response = await fetch("https://api-tecsomobi.onrender.com/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -135,7 +135,7 @@ const AdminPage = () => {
 
     if (selectedId === null) {
       try {
-        const response = await fetch("http://localhost:3000/chargingPoints", {
+        const response = await fetch("https://api-tecsomobi.onrender.com/chargingPoints", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -153,7 +153,7 @@ const AdminPage = () => {
     } else {
       try {
         const response = await fetch(
-          `http://localhost:3000/chargingPoints/${selectedId}`,
+          `https://api-tecsomobi.onrender.com/chargingPoints/${selectedId}`,
           {
             method: "PUT",
             headers: {
@@ -177,7 +177,7 @@ const AdminPage = () => {
     const token = getToken();
     try {
       const response = await fetch(
-        `http://localhost:3000/chargingPoints/${id}`,
+        `https://api-tecsomobi.onrender.com/chargingPoints/${id}`,
         {
           method: "DELETE",
           headers: {
