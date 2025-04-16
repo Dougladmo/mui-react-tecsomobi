@@ -326,22 +326,22 @@ const AdminPage = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {chargingPoints.map((cp) => (
-                  <TableRow key={cp.id}>
-                    <TableCell>{cp.id}</TableCell>
-                    <TableCell>{cp.nome}</TableCell>
-                    <TableCell>{cp.endereco}</TableCell>
-                    <TableCell>{cp.tipoRecarga}</TableCell>
-                    <TableCell>{cp.status ? "Ativo" : "Inativo"}</TableCell>
-                    <TableCell>{cp.horarioFuncionamento}</TableCell>
-                    <TableCell>{cp.responsavelNome}</TableCell>
-                    <TableCell>{cp.responsavelContato}</TableCell>
+                {chargingPoints.map((chargingPoint) => (
+                  <TableRow key={chargingPoint.id}>
+                    <TableCell>{chargingPoint.id}</TableCell>
+                    <TableCell>{chargingPoint.nome}</TableCell>
+                    <TableCell>{chargingPoint.endereco}</TableCell>
+                    <TableCell>{chargingPoint.tipoRecarga}</TableCell>
+                    <TableCell>{chargingPoint.status ? "Ativo" : "Inativo"}</TableCell>
+                    <TableCell>{chargingPoint.horarioFuncionamento}</TableCell>
+                    <TableCell>{chargingPoint.responsavelNome}</TableCell>
+                    <TableCell>{chargingPoint.responsavelContato}</TableCell>
                     <TableCell>
                       <Stack direction="row" spacing={1}>
                         <Button
                           variant="outlined"
                           size="small"
-                          onClick={() => handleEdit(cp)}
+                          onClick={() => handleEdit(chargingPoint)}
                         >
                           Editar
                         </Button>
@@ -349,7 +349,7 @@ const AdminPage = () => {
                           variant="outlined"
                           color="error"
                           size="small"
-                          onClick={() => handleDelete(cp.id)}
+                          onClick={() => handleDelete(chargingPoint.id)}
                         >
                           Deletar
                         </Button>

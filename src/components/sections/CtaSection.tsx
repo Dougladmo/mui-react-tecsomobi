@@ -1,5 +1,12 @@
+import { useNavigate } from "react-router-dom";
 
 const CtaSection = () => {
+  const navigate = useNavigate()
+  
+  const handleLinkClick = () => {
+    navigate('/pontos-de-recarga')
+  }
+
   return (
     <div
       id="cta"
@@ -9,8 +16,8 @@ const CtaSection = () => {
         Está pronto para recarregar seu cartão com mais praticidade?
       </h2>
       <a
-        className="from-[#175097] to-[#306EBC] bg-gradient-to-b text-base md:text-lg mt-10 md:mt-14 rounded-2xl px-5 py-5 text-white"
-        href="#"
+        onClick={handleLinkClick}
+        className="from-[#175097] to-[#306EBC] cursor-pointer bg-gradient-to-b text-base md:text-lg mt-16 my-10 rounded-2xl px-5 py-5 text-[#F0F0F0] border border-transparent shadow-md hover:text-[#175097] hover:border-[#175097] hover:from-[#F0F0F0] hover:to-[#F0F0F0] transition duration-300"
       >
         Acesse o mapa agora mesmo
       </a>

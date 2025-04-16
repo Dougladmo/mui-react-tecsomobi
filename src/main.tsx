@@ -8,6 +8,7 @@ import ErrorPage from './pages/Error/PageNotFound.js';
 import AdminPage from './pages/Admin/AdminPage.js';
 
 import './index.css';
+import MapPage from './pages/Map/MapPage.js';
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <AdminPage />,
+      },
+      {
+        path: "/pontos-de-recarga",
+        element: <MapPage />,
       },
     ],
   },
