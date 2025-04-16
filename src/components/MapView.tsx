@@ -25,7 +25,6 @@ export default function MapView({ center, points }: MapViewProps) {
           title={p.nome}
           onClick={() => setSelected(p)}
           icon={{
-            // path do ícone “place” do Material Design
             path: "M12 2C8.13 2 5 5.13 5 9c0 4.25 7 11 7 11s7-6.75 7-11c0-3.87-3.13-7-7-7z M12 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z",
             fillColor: p.status ? "#FF5627" : "#c0392b",
             fillOpacity: 1,

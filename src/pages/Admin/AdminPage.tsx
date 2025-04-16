@@ -56,12 +56,6 @@ const initialFormData = {
 };
 
 const getToken = (): string | null => {
-  const cookieMatch = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("jwtToken="));
-  if (cookieMatch) {
-    return cookieMatch.split("=")[1];
-  }
   return sessionStorage.getItem("jwtToken");
 };
 
@@ -107,8 +101,7 @@ const AdminPage = () => {
           } else {
             setIsLogged(false);
           }
-        } catch (error) {
-          console.error(error);
+        } catch {
           setIsLogged(false);
         }
       })();
@@ -118,7 +111,6 @@ const AdminPage = () => {
   const handleLogin = async (
     email: string,
     password: string,
-    rememberMe: boolean
   ) => {
     try {
       const response = await fetch("http://localhost:3000/admin/login", {
@@ -128,11 +120,7 @@ const AdminPage = () => {
       });
       if (!response.ok) throw new Error("Login falhou");
       const data = await response.json();
-      if (rememberMe) {
-        document.cookie = `jwtToken=${data.token}; path=/;`;
-      } else {
-        sessionStorage.setItem("jwtToken", data.token);
-      }
+      sessionStorage.setItem("jwtToken", data.token);
       setIsLogged(true);
       loadChargingPoints();
     } catch (error) {
@@ -239,7 +227,7 @@ const AdminPage = () => {
     <>
       <AppBar position="fixed" sx={{ bgcolor: "#175097" }}>
         <Toolbar className="w-full flex justify-between">
-          <div className="flex items-center">
+          <Box className="flex items-center">
             <IconButton
               edge="start"
               color="inherit"
@@ -248,10 +236,10 @@ const AdminPage = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Typography variant="h6" noWrap>
               Tabelas
             </Typography>
-          </div>
+          </Box>
           <img
             className="w-44 bg-white rounded-lg"
             src="/logo2.png"
@@ -264,10 +252,7 @@ const AdminPage = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <Box
-          sx={{ width: 240, bgcolor: "#175097", height: "100%", color: "#fff" }}
-          role="presentation"
-        >
+        <Box sx={{ width: 240, bgcolor: "#175097", height: "100%", color: "#fff" }}>
           <List>
             <ListItem disablePadding>
               <ListItemButton>
@@ -280,8 +265,6 @@ const AdminPage = () => {
             <ListItem disablePadding>
               <ListItemButton
                 onClick={() => {
-                  document.cookie =
-                    "jwtToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
                   sessionStorage.removeItem("jwtToken");
                   window.location.reload();
                 }}
@@ -326,22 +309,22 @@ const AdminPage = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {chargingPoints.map((chargingPoint) => (
-                  <TableRow key={chargingPoint.id}>
-                    <TableCell>{chargingPoint.id}</TableCell>
-                    <TableCell>{chargingPoint.nome}</TableCell>
-                    <TableCell>{chargingPoint.endereco}</TableCell>
-                    <TableCell>{chargingPoint.tipoRecarga}</TableCell>
-                    <TableCell>{chargingPoint.status ? "Ativo" : "Inativo"}</TableCell>
-                    <TableCell>{chargingPoint.horarioFuncionamento}</TableCell>
-                    <TableCell>{chargingPoint.responsavelNome}</TableCell>
-                    <TableCell>{chargingPoint.responsavelContato}</TableCell>
+                {chargingPoints.map((cp) => (
+                  <TableRow key={cp.id}>
+                    <TableCell>{cp.id}</TableCell>
+                    <TableCell>{cp.nome}</TableCell>
+                    <TableCell>{cp.endereco}</TableCell>
+                    <TableCell>{cp.tipoRecarga}</TableCell>
+                    <TableCell>{cp.status ? "Ativo" : "Inativo"}</TableCell>
+                    <TableCell>{cp.horarioFuncionamento}</TableCell>
+                    <TableCell>{cp.responsavelNome}</TableCell>
+                    <TableCell>{cp.responsavelContato}</TableCell>
                     <TableCell>
                       <Stack direction="row" spacing={1}>
                         <Button
                           variant="outlined"
                           size="small"
-                          onClick={() => handleEdit(chargingPoint)}
+                          onClick={() => handleEdit(cp)}
                         >
                           Editar
                         </Button>
@@ -349,7 +332,7 @@ const AdminPage = () => {
                           variant="outlined"
                           color="error"
                           size="small"
-                          onClick={() => handleDelete(chargingPoint.id)}
+                          onClick={() => handleDelete(cp.id)}
                         >
                           Deletar
                         </Button>
@@ -360,17 +343,10 @@ const AdminPage = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Dialog
-            open={openFormModal}
-            onClose={handleCloseModal}
-            fullWidth
-            maxWidth="md"
-          >
+          <Dialog open={openFormModal} onClose={handleCloseModal} fullWidth maxWidth="md">
             <form onSubmit={handleFormSubmit}>
               <DialogTitle>
-                {selectedId
-                  ? "Editar Ponto de Recarga"
-                  : "Novo Ponto de Recarga"}
+                {selectedId ? "Editar Ponto de Recarga" : "Novo Ponto de Recarga"}
               </DialogTitle>
               <DialogContent>
                 <Stack spacing={2} sx={{ mt: 2 }}>
@@ -507,21 +483,13 @@ const AdminPage = () => {
                 </Stack>
               </DialogContent>
               <DialogActions>
-                <Button
-                  onClick={handleCloseModal}
-                  variant="outlined"
-                  color="secondary"
-                >
+                <Button onClick={handleCloseModal} variant="outlined" color="secondary">
                   Cancelar
                 </Button>
                 <Button
                   type="submit"
                   variant="contained"
-                  sx={{
-                    bgcolor: "#FF5627",
-                    color: "#FFFFFF",
-                    "&:hover": { bgcolor: "#FF7452" },
-                  }}
+                  sx={{ bgcolor: "#FF5627", color: "#FFFFFF", "&:hover": { bgcolor: "#FF7452" } }}
                 >
                   {selectedId ? "Atualizar" : "Cadastrar"}
                 </Button>
