@@ -6,6 +6,12 @@
 
 ---
 
+# O crud pedido no desafio está na rota [🔗 CRUD](https://mui-react-tecsomobi.vercel.app/admin)
+### email: admin@gmail.com
+### senha: 1234
+
+---
+
 ## 📌 Visão Geral
 Esta SPA exibe pontos de recarga de cartão urbano em um **mapa interativo** e oferece uma área administrativa (`/admin`) onde o usuário _admin_ pode realizar o **CRUD completo** desses pontos.
 
